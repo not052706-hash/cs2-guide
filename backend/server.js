@@ -61,5 +61,4 @@ app.post('/api/contact', (req, res) => {
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`CS2 справочник запущен на порту ${PORT}`);
-  console.log(`Открыть: http://localhost:${PORT}`);
 });
