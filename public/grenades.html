@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Гранаты CS2 | CS2 Pro Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0f0f12; font-family: 'Inter', sans-serif; }
+    .glass-card { background: rgba(43,45,49,0.7); backdrop-filter: blur(8px); border:1px solid transparent; transition: all 0.25s ease; position: relative; }
+    .glass-card::before { content:''; position:absolute; inset:0; border-radius:inherit; padding:1px; background:linear-gradient(135deg, rgba(249,115,22,0.3), transparent); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; }
+    .glass-card:hover { transform: scale(1.02); }
+    .glass-card:hover::before { background: linear-gradient(135deg, #f97316, rgba(249,115,22,0.5)); }
+    .sidebar-item-active { background: rgba(88,101,242,0.1); border-left: 3px solid #5865f2; }
+    .sidebar-item { transition: all 0.2s; }
+    .sidebar-item:hover { background: rgba(88,101,242,0.08); }
+    .spawn-selector::-webkit-scrollbar { height: 4px; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1e1f22; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+  </style>
+</head>
+<body class="text-gray-200">
+
+<div class="flex min-h-screen">
+  <aside class="w-72 bg-[#1e1f22] border-r border-[#2b2d31] p-4 sticky top-0 h-screen overflow-y-auto hidden md:block">
+    <div class="flex items-center gap-2 mb-8 px-2"><div class="w-8 h-8 bg-[#a855f7] rounded-md flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 4h16v16H4z M4 12h16 M12 4v16"/></svg></div><span class="text-white font-semibold text-lg">CS2 PRO GUIDE</span></div>
+    <div class="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">РАЗДЕЛЫ</div>
+    <div class="space-y-1">
+      <a href="/" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg><span class="text-gray-400 text-sm">Главная</span></a>
+      <a href="/tips.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="text-gray-400 text-sm">Советы</span></a>
+      <a href="/maps.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg><span class="text-gray-400 text-sm">Карты</span></a>
+      <a href="/grenades.html" class="sidebar-item-active sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10M12 2v10l5 5"/></svg><span class="text-white text-sm">Гранаты</span></a>
+      <a href="/mechanics.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg><span class="text-gray-400 text-sm">Механика</span></a>
+      <a href="/training.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 2 12 12 17 22 12 22 7 12 2"/><line x1="2" y1="17" x2="2" y2="12"/><line x1="22" y1="17" x2="22" y2="12"/></svg><span class="text-gray-400 text-sm">Тренировки</span></a>
+      <a href="/reaction.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="text-gray-400 text-sm">Реакция</span></a>
+      <a href="/weapons.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h10v10H7z M3 3h18v18H3z"/></svg><span class="text-gray-400 text-sm">Оружие</span></a>
+      <a href="/economy.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M6 6v12M18 6v12M4 21h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg><span class="text-gray-400 text-sm">Экономика</span></a>
+      <a href="/contact.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span class="text-gray-400 text-sm">Вопросы</span></a>
+    </div>
+  </aside>
+
+  <main class="flex-1 p-8">
+    <h1 class="text-4xl font-bold text-white mb-2">Гайды по гранатам</h1>
+    <p class="text-gray-400 mb-6">Линейки дымов, флешек и молотовых с визуальными подсказками</p>
+    <div class="flex flex-wrap justify-center gap-3 mb-8">
+      <button onclick="filterNades('all')" class="filter-btn bg-[#a855f7] px-4 py-2 rounded-full text-sm">Все карты</button>
+      <button onclick="filterNades('mirage')" class="filter-btn bg-gray-700 px-4 py-2 rounded-full text-sm">Mirage</button>
+      <button onclick="filterNades('inferno')" class="filter-btn bg-gray-700 px-4 py-2 rounded-full text-sm">Inferno</button>
+      <button onclick="filterNades('dust2')" class="filter-btn bg-gray-700 px-4 py-2 rounded-full text-sm">Dust2</button>
+    </div>
+    <div id="nades-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50" onclick="closeModal()"><div class="max-w-4xl max-h-[90vh] p-4"><img id="modal-img" src="" class="rounded-lg shadow-2xl"><p class="text-center text-white mt-4">Нажми в любом месте чтобы закрыть | ESC</p></div></div>
+  </main>
+</div>
+
+<script>
+const nadesDatabase = [
+  { map: "mirage", name: "Дым на Window", screenshots: [ { src: "/images/mirage/window-smoke-1.jpg", label: "Спавн 1" }, { src: "/images/mirage/window-smoke-2.jpg", label: "Спавн 2" }, { src: "/images/mirage/window-smoke-3.jpg", label: "Спавн 3" }, { src: "/images/mirage/window-smoke-4.jpg", label: "Спавн 4" }, { src: "/images/mirage/window-smoke-5.jpg", label: "Спавн 5" } ] },
+  { map: "mirage", name: "Дым на CT", screenshots: [ { src: "/images/mirage/ct-smoke.jpg", label: "Стандарт" } ] },
+  { map: "mirage", name: "Дым на Jungle", screenshots: [ { src: "/images/mirage/jungle-smoke.jpg", label: "Из аппартаментов" } ] },
+  { map: "inferno", name: "Молотов на тройку (с Banana)", screenshots: [ { src: "/images/inferno/molo-troyka.jpg", label: "Как кидать" }, { src: "/images/inferno/molo-troyka1.jpg", label: "Результат" } ] },
+  { map: "inferno", name: "Дым на CT (с Banana)", screenshots: [ { src: "/images/inferno/smoke-ct-banana.jpg", label: "Как кидать" }, { src: "/images/inferno/smoke-ct-banana1.jpg", label: "Результат" } ] },
+  { map: "inferno", name: "Дым на гробы (с тачки)", screenshots: [ { src: "/images/inferno/smoke-groby-tachka.jpg", label: "Как кидать" }, { src: "/images/inferno/smoke-groby-tachka1.jpg", label: "Результат" } ] },
+  { map: "inferno", name: "Молотов в яму (с апсов)", screenshots: [ { src: "/images/inferno/molo-yama-aps.jpg", label: "Как кидать" } ] },
+  { map: "dust2", name: "Дым на Xbox (со спавна T)", screenshots: [ { src: "/images/dust2/xbox-smoke.jpg", label: "Как целиться" }, { src: "/images/dust2/xbox-smoke1.jpg", label: "Результат" } ] },
+  { map: "dust2", name: "Дым на Mid Doors (со спавна T)", screenshots: [ { src: "/images/dust2/mid-smoke.jpg", label: "Как целиться" }, { src: "/images/dust2/mid-smoke1.jpg", label: "Результат" } ] },
+  { map: "dust2", name: "Дым в окно B (с верхней тёмки)", screenshots: [ { src: "/images/dust2/b-window-smoke.jpg", label: "Как целиться" }, { src: "/images/dust2/b-window-smoke1.jpg", label: "Результат" } ] },
+  { map: "dust2", name: "Молотов на тачку (с бочки)", screenshots: [ { src: "/images/dust2/car-molly.jpg", label: "Как целиться" } ] }
+];
+let currentFilter = 'all';
+function filterNades(map) { currentFilter = map; renderNades(); document.querySelectorAll('.filter-btn').forEach(btn => { btn.classList.remove('bg-[#a855f7]'); btn.classList.add('bg-gray-700'); }); if (event && event.target) { event.target.classList.remove('bg-gray-700'); event.target.classList.add('bg-[#a855f7]'); } }
+function openModal(src) { const modal = document.getElementById('modal'); const img = document.getElementById('modal-img'); img.src = src; modal.classList.remove('hidden'); modal.classList.add('flex'); }
+function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+function renderNades() {
+  const container = document.getElementById('nades-container');
+  const filtered = currentFilter === 'all' ? nadesDatabase : nadesDatabase.filter(n => n.map === currentFilter);
+  if (!filtered.length) { container.innerHTML = '<div class="col-span-3 text-center text-gray-400">Нет гайдов</div>'; return; }
+  container.innerHTML = filtered.map(nade => {
+    let screenshotsHtml = '';
+    if (nade.screenshots.length === 1) {
+      screenshotsHtml = `<div class="relative h-56 cursor-pointer overflow-hidden group" onclick="openModal('${nade.screenshots[0].src}')"><img src="${nade.screenshots[0].src}" onerror="this.src='https://via.placeholder.com/400x300/1a2a3a/4ade80?text=Скриншот+не+найден'" class="w-full h-full object-cover group-hover:scale-110 transition"><div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"><span class="bg-[#a855f7] px-3 py-1 rounded-full text-sm">Увеличить</span></div></div>`;
+    } else {
+      screenshotsHtml = `<div class="p-3 bg-gray-900/50"><p class="text-xs text-gray-400 mb-2">Выбери скриншот:</p><div class="flex gap-2 overflow-x-auto pb-2 spawn-selector">${nade.screenshots.map(ss => `<div class="flex-shrink-0 w-28 cursor-pointer group" onclick="openModal('${ss.src}')"><img src="${ss.src}" onerror="this.src='https://via.placeholder.com/112x80/1a2a3a/4ade80?text=нет'" class="w-28 h-20 object-cover rounded-lg group-hover:ring-2 group-hover:ring-[#a855f7]"><p class="text-xs text-gray-400 mt-1 text-center">${ss.label}</p></div>`).join('')}</div></div>`;
+    }
+    return `<div class="glass-card rounded-2xl overflow-hidden">${screenshotsHtml}<div class="p-4 text-center"><h3 class="text-lg font-bold text-[#f97316]">${nade.name}</h3></div></div>`;
+  }).join('');
+}
+renderNades();
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Механика CS2 — полный справочник | CS2 Pro Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0f0f12; font-family: 'Inter', sans-serif; }
+    .glass-card {
+      background: rgba(43, 45, 49, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.3), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .glass-card:hover { transform: scale(1.02); }
+    .glass-card:hover::before { background: linear-gradient(135deg, #38bdf8, rgba(56,189,248,0.5)); }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #374151; padding: 10px; text-align: left; }
+    th { background: #1e1f22; color: #38bdf8; font-weight: 600; }
+    .sidebar-item-active { background: rgba(88,101,242,0.1); border-left: 3px solid #5865f2; }
+    .sidebar-item { transition: all 0.2s; }
+    .sidebar-item:hover { background: rgba(88,101,242,0.08); }
+    .gif-container {
+      background: #1e1f22;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      margin-bottom: 16px;
+      min-height: 120px;
+      border: 1px dashed #374151;
+    }
+    .gif-container img {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .fallback-text {
+      color: #6b7280;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .fallback-text code {
+      background: #2b2d31;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #a855f7;
+    }
+  </style>
+</head>
+<body class="text-gray-200">
+
+<div class="flex min-h-screen">
+  
+  <!-- БОКОВОЕ МЕНЮ -->
+  <aside class="w-72 bg-[#1e1f22] border-r border-[#2b2d31] p-4 sticky top-0 h-screen overflow-y-auto hidden md:block">
+    <div class="flex items-center gap-2 mb-8 px-2">
+      <div class="w-8 h-8 bg-[#a855f7] rounded-md flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 4h16v16H4z M4 12h16 M12 4v16"/></svg>
+      </div>
+      <span class="text-white font-semibold text-lg">CS2 PRO GUIDE</span>
+    </div>
+    <div class="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">РАЗДЕЛЫ</div>
+    <div class="space-y-1">
+      <a href="/" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg>
+        <span class="text-gray-400 text-sm">Главная</span>
+      </a>
+      <a href="/tips.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="text-gray-400 text-sm">Советы</span>
+      </a>
+      <a href="/maps.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg>
+        <span class="text-gray-400 text-sm">Карты</span>
+      </a>
+      <a href="/grenades.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10M12 2v10l5 5"/></svg>
+        <span class="text-gray-400 text-sm">Гранаты</span>
+      </a>
+      <a href="/mechanics.html" class="sidebar-item-active flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5"><path d="M12 2v4M12 18v4M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="text-white text-sm">Механика</span>
+      </a>
+      <a href="/training.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 2 12 12 17 22 12 22 7 12 2"/><line x1="2" y1="17" x2="2" y2="12"/><line x1="22" y1="17" x2="22" y2="12"/></svg>
+        <span class="text-gray-400 text-sm">Тренировки</span>
+      </a>
+      <a href="/reaction.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="text-gray-400 text-sm">Реакция</span>
+      </a>
+      <a href="/weapons.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h10v10H7z M3 3h18v18H3z"/></svg>
+        <span class="text-gray-400 text-sm">Оружие</span>
+      </a>
+      <a href="/economy.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M6 6v12M18 6v12M4 21h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+        <span class="text-gray-400 text-sm">Экономика</span>
+      </a>
+      <a href="/contact.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <span class="text-gray-400 text-sm">Вопросы</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="flex-1 p-8 max-w-5xl mx-auto">
+    <h1 class="text-4xl font-bold text-white mb-2">Механика CS2</h1>
+    <p class="text-gray-400 mb-6">Полное руководство по движению, оружию и физике игры</p>
+
+    <!-- Скорость с оружием -->
+    <div class="glass-card rounded-2xl p-6 mb-6">
+      <h2 class="text-2xl font-bold text-[#38bdf8] mb-4">Скорость с оружием</h2>
+      <p class="text-gray-300 text-sm mb-3">В CS2 у каждого оружия своя скорость передвижения. Чем тяжелее оружие — тем медленнее вы идёте.</p>
+      <table class="w-full text-sm">
+        <thead><tr><th>Оружие</th><th>Скорость (units/сек)</th><th>Сравнение с ножом</th></tr></thead>
+        <tbody>
+          <tr><td>Нож / C4</td><td>250</td><td>100% (максимум)</td></tr>
+          <tr><td>ПП (MAC-10, MP9)</td><td>240</td><td>96%</td></tr>
+          <tr><td>Пистолеты (USP, Glock)</td><td>240</td><td>96%</td></tr>
+          <tr><td>Deagle / Revolver</td><td>230</td><td>92%</td></tr>
+          <tr><td>Винтовки (M4, AK)</td><td>215</td><td>86%</td></tr>
+          <tr><td>AWP</td><td>150</td><td>60%</td></tr>
+        </tbody>
+      </table>
+      <div class="mt-4 text-sm text-gray-400">💡 Совет: с AWP вы очень медленный. Старайтесь не бегать с ним по открытым пространствам.</div>
+    </div>
+
+    <!-- Скорость от действия -->
+    <div class="glass-card rounded-2xl p-6 mb-6">
+      <h2 class="text-2xl font-bold text-[#38bdf8] mb-4">Скорость в зависимости от действия</h2>
+      <table class="w-full text-sm">
+        <thead><tr><th>Действие</th><th>Скорость</th><th>Примечание</th></tr></thead>
+        <tbody>
+          <tr><td>Бег вперёд</td><td>100% (250)</td><td>Максимальная скорость</td></tr>
+          <tr><td>Крадучись (Shift)</td><td>~25% (~65)</td><td>Бесшумно, но медленно</td></tr>
+          <tr><td>Бег назад (S)</td><td>90% (225)</td><td>Немного медленнее</td></tr>
+          <tr><td>Бег вбок (A или D)</td><td>90% (225)</td><td>Стрейф</td></tr>
+          <tr><td>Присед (Ctrl)</td><td>~15% (~35)</td><td>Максимальная точность</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- КОНТРСТРЕЙФ -->
+    <div class="glass-card rounded-2xl p-6 mb-6">
+      <h2 class="text-2xl font-bold text-[#38bdf8] mb-4">Контрстрейф (Counter-Strafing)</h2>
+      <div class="gif-container">
+        <img src="/images/mechanics/counter-strafe.gif" 
+             alt="Демонстрация контрстрейфа"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="fallback-text" style="display:none;">
+          <span>🎯</span><br>
+          GIF не найден.<br>
+          Положи файл <code>counter-strafe.gif</code> в папку <code>public/images/mechanics/</code>
+        </div>
+      </div>
+      <p class="text-gray-300 mb-3">Техника мгновенной остановки для точного выстрела.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-[#1e1f22] p-3 rounded">
+          <p class="font-bold text-yellow-400">Без контрстрейфа:</p>
+          <p>Остановка за 0.3–0.4 секунды → пули летят неточно</p>
+        </div>
+        <div class="bg-[#1e1f22] p-3 rounded border border-[#38bdf8]">
+          <p class="font-bold text-[#38bdf8]">С контрстрейфом (A → D):</p>
+          <p>Остановка за 0.1–0.15 секунды → пули точные</p>
+        </div>
+      </div>
+      <div class="mt-4 text-sm text-gray-400">💡 Тренировка: Aim Botz → режим "Moving" → практикуй 10 минут в день</div>
+    </div>
+
+    <!-- СЁРФИНГ -->
+    <div class="glass-card rounded-2xl p-6 mb-6">
+      <h2 class="text-2xl font-bold text-[#38bdf8] mb-4">Сёрфинг (Surf)</h2>
+      <div class="gif-container">
+        <img src="/images/mechanics/surf.gif" 
+             alt="Демонстрация сёрфинга"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="fallback-text" style="display:none;">
+          <span>🏄</span><br>
+          GIF не найден.<br>
+          Положи файл <code>surf.gif</code> в папку <code>public/images/mechanics/</code>
+        </div>
+      </div>
+      <p class="text-gray-300 mb-3">Из-за особенностей движка Source персонаж может "скользить" по наклонным поверхностям, набирая скорость.</p>
+      <div class="bg-[#1e1f22] p-3 rounded">
+        <p class="font-bold text-[#38bdf8]">Как кататься:</p>
+        <p>Прыгни на наклон → удерживай A или D в сторону склона → не нажимай W</p>
+      </div>
+    </div>
+
+    <!-- БАНИХОП (НОВАЯ СТАТЬЯ) -->
+    <div class="glass-card rounded-2xl p-6 mb-6">
+      <h2 class="text-2xl font-bold text-[#38bdf8] mb-4">Банни-хоп (Bunny Hop)</h2>
+      <div class="gif-container">
+        <img src="/images/mechanics/bunnyhop.gif" 
+             alt="Демонстрация банни-хопа"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="fallback-text" style="display:none;">
+          <span>🐰</span><br>
+          GIF не найден.<br>
+          Положи файл <code>bunnyhop.gif</code> в папку <code>public/images/mechanics/</code>
+        </div>
+      </div>
+      <p class="text-gray-300 mb-3">Техника прыжков с сохранением скорости. Позволяет передвигаться быстрее обычного бега.</p>
+      <div class="bg-[#1e1f22] p-3 rounded mb-3">
+        <p class="font-bold text-[#38bdf8]">Как делать:</p>
+        <ul class="list-disc list-inside text-sm text-gray-300 mt-1 space-y-1">
+          <li>Разгонись (беги вперёд).</li>
+          <li>Прыгни (прокрути колёсико мыши вниз).</li>
+          <li>В воздухе зажми <strong class="text-white">A</strong> и поверни мышь влево.</li>
+          <li>Перед приземлением отпусти A, зажми <strong class="text-white">D</strong> и поверни мышь вправо.</li>
+          <li>В момент приземления снова прыгни (снова прокрути колёсико).</li>
+          <li>Повторяй — скорость будет нарастать.</li>
+        </ul>
+      </div>
+      <div class="bg-yellow-900/30 p-3 rounded border border-yellow-700">
+        <p class="text-sm text-yellow-400">⚠️ <strong>Важно:</strong> В CS2 Valve ограничила максимальную скорость банни-хопа, но техника всё ещё работает и даёт преимущество в движении.</p>
+      </div>
+      <div class="mt-3 text-sm text-gray-400">💡 Совет: тренируй банни-хоп на специальных картах (например, «Bhop Training» в Workshop), чтобы чувствовать ритм прыжков.</div>
+    </div>
+
+    <!-- Тэггинг -->
+    <div class="glass-card rounded-2xl p-6 mb-6">
+      <h2 class="text-2xl font-bold text-[#38bdf8] mb-4">Тэггинг (Tagging)</h2>
+      <p class="text-gray-300 mb-3">Замедление врага при попадании в него.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-red-900/30 p-3 rounded">
+          <p class="font-bold text-red-400">Без брони</p>
+          <p>Замедление на 50–70% → враг почти стоит</p>
+        </div>
+        <div class="bg-blue-900/30 p-3 rounded">
+          <p class="font-bold text-blue-400">С бронёй (Kevlar)</p>
+          <p>Замедление на 30–40% → может уйти</p>
+        </div>
+      </div>
+      <div class="mt-3 text-sm text-gray-400">💡 Первым попаданием замедли врага, вторым — добивай в голову.</div>
+    </div>
+
+    <!-- Звуки -->
+    <div class="glass-card rounded-2xl p-6">
+      <h2 class="text-2xl font-bold text-[#38bdf8] mb-4">Звуки и их радиус</h2>
+      <table class="w-full text-sm">
+        <thead><tr><th>Действие</th><th>Радиус слышимости</th></tr></thead>
+        <tbody>
+          <tr><td>Бег</td><td>20–25 метров</td></tr>
+          <tr><td>Крадучись (Shift)</td><td>0 метров (бесшумно)</td></tr>
+          <tr><td>Прыжок</td><td>15–20 метров</td></tr>
+          <tr><td>Перезарядка</td><td>10–15 метров</td></tr>
+          <tr><td>Выстрел (без глушителя)</td><td>Вся карта</td></tr>
+          <tr><td>Выстрел (с глушителем)</td><td>~15 метров</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>

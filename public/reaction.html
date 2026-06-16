@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тест реакции | CS2 Pro Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0f0f12; font-family: 'Inter', sans-serif; }
+    .reaction-box { transition: background-color 0.05s ease; cursor: pointer; user-select: none; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .waiting { animation: pulse 1s infinite; }
+    .glass-card {
+      background: rgba(43, 45, 49, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(88,101,242,0.3), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .sidebar-item-active { background: rgba(88,101,242,0.1); border-left: 3px solid #5865f2; }
+    .sidebar-item { transition: all 0.2s; }
+    .sidebar-item:hover { background: rgba(88,101,242,0.08); }
+  </style>
+</head>
+<body class="text-gray-200">
+
+<div class="flex min-h-screen">
+  <aside class="w-72 bg-[#1e1f22] border-r border-[#2b2d31] p-4 sticky top-0 h-screen overflow-y-auto hidden md:block">
+    <div class="flex items-center gap-2 mb-8 px-2">
+      <div class="w-8 h-8 bg-[#a855f7] rounded-md flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 4h16v16H4z M4 12h16 M12 4v16"/></svg></div>
+      <span class="text-white font-semibold text-lg">CS2 PRO GUIDE</span>
+    </div>
+    <div class="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">РАЗДЕЛЫ</div>
+    <div class="space-y-1">
+      <a href="/" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg><span class="text-gray-400 text-sm">Главная</span></a>
+      <a href="/tips.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="text-gray-400 text-sm">Советы</span></a>
+      <a href="/maps.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg><span class="text-gray-400 text-sm">Карты</span></a>
+      <a href="/grenades.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10M12 2v10l5 5"/></svg><span class="text-gray-400 text-sm">Гранаты</span></a>
+      <a href="/mechanics.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg><span class="text-gray-400 text-sm">Механика</span></a>
+      <a href="/training.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 2 12 12 17 22 12 22 7 12 2"/><line x1="2" y1="17" x2="2" y2="12"/><line x1="22" y1="17" x2="22" y2="12"/></svg><span class="text-gray-400 text-sm">Тренировки</span></a>
+      <a href="/reaction.html" class="sidebar-item-active sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="text-white text-sm">Реакция</span></a>
+      <a href="/weapons.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h10v10H7z M3 3h18v18H3z"/></svg><span class="text-gray-400 text-sm">Оружие</span></a>
+      <a href="/economy.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M6 6v12M18 6v12M4 21h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg><span class="text-gray-400 text-sm">Экономика</span></a>
+      <a href="/contact.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span class="text-gray-400 text-sm">Вопросы</span></a>
+    </div>
+  </aside>
+
+  <main class="flex-1 p-8 max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold text-white mb-2 text-center">Тест на реакцию</h1>
+    <p class="text-gray-400 mb-6 text-center">Нажми пробел или кликни когда экран станет зелёным</p>
+
+    <div id="reactionBox" class="reaction-box w-full h-96 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-75 bg-blue-600 cursor-pointer" onclick="handleClick()">
+      <div class="text-center">
+        <div id="statusText" class="text-4xl font-bold text-white drop-shadow-lg">ГОТОВ?</div>
+        <p id="instructionText" class="text-white/80 mt-4 text-lg">Нажми пробел или кликни чтобы начать</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 mt-8">
+      <div class="glass-card rounded-2xl p-4 text-center"><p class="text-gray-400 text-sm">ЛУЧШЕЕ ВРЕМЯ</p><p id="bestTime" class="text-3xl font-bold text-[#a855f7] mono">—</p></div>
+      <div class="glass-card rounded-2xl p-4 text-center"><p class="text-gray-400 text-sm">ПОПЫТКА</p><p id="attemptCount" class="text-3xl font-bold text-yellow-400 mono">0 / 3</p></div>
+      <div class="glass-card rounded-2xl p-4 text-center"><p class="text-gray-400 text-sm">ПОСЛЕДНИЙ РЕЗУЛЬТАТ</p><p id="lastTime" class="text-3xl font-bold text-blue-400 mono">—</p></div>
+    </div>
+
+    <div class="text-center mt-6"><button onclick="resetTest()" class="bg-gray-700 hover:bg-red-600 px-6 py-2 rounded-lg transition">Сбросить статистику</button></div>
+    <div class="glass-card rounded-2xl p-5 mt-6"><h3 class="text-lg font-bold text-gray-300 mb-2">Результаты попыток:</h3><div id="resultsList" class="flex flex-wrap gap-2"><span class="text-gray-500 text-sm">Пока нет результатов</span></div></div>
+    <div class="glass-card rounded-2xl p-5 mt-6"><p class="text-sm text-blue-300">Средняя реакция про-игроков — 150-200 мс. Тренируйся!</p></div>
+  </main>
+</div>
+
+<script>
+let testState = 'idle', timeoutId = null, startTime = 0, attempt = 1, bestReaction = null, results = [];
+const reactionBox = document.getElementById('reactionBox'), statusText = document.getElementById('statusText'), instructionText = document.getElementById('instructionText');
+const bestTimeEl = document.getElementById('bestTime'), attemptCountEl = document.getElementById('attemptCount'), lastTimeEl = document.getElementById('lastTime'), resultsList = document.getElementById('resultsList');
+
+function loadStats() { const saved = localStorage.getItem('cs2_reaction_stats'); if (saved) { const data = JSON.parse(saved); bestReaction = data.bestReaction; results = data.results || []; attempt = data.attempt || 1; updateDisplay(); } }
+function saveStats() { localStorage.setItem('cs2_reaction_stats', JSON.stringify({ bestReaction, results, attempt })); }
+function updateDisplay() { bestTimeEl.innerText = (bestReaction && bestReaction !== Infinity) ? bestReaction + ' ms' : '—'; attemptCountEl.innerText = attempt + ' / 3'; resultsList.innerHTML = results.length ? results.map((r, i) => `<span class="px-3 py-1 rounded-full text-sm ${r === 'false start' ? 'bg-red-600/30 text-red-400' : (r <= 200 ? 'bg-green-600/30 text-green-400' : 'bg-yellow-600/30 text-yellow-400')}">${i+1}. ${r === 'false start' ? 'Фальшстарт' : r + ' ms'}</span>`).join('') : '<span class="text-gray-500 text-sm">Пока нет результатов</span>'; }
+function resetTest() { if (timeoutId) clearTimeout(timeoutId); testState = 'idle'; attempt = 1; bestReaction = null; results = []; saveStats(); updateDisplay(); reactionBox.classList.remove('waiting'); reactionBox.style.backgroundColor = '#2563eb'; statusText.innerText = 'ГОТОВ?'; instructionText.innerText = 'Нажми пробел или кликни чтобы начать'; lastTimeEl.innerText = '—'; }
+function startWaiting() { if (testState !== 'idle') return; testState = 'waiting'; reactionBox.style.backgroundColor = '#2563eb'; statusText.innerText = 'ЖДИ...'; instructionText.innerText = 'Не нажимай! Жди зелёный свет'; reactionBox.classList.add('waiting'); const delay = Math.random() * 4000 + 1000; timeoutId = setTimeout(() => { if (testState === 'waiting') { testState = 'ready'; reactionBox.style.backgroundColor = '#22c55e'; statusText.innerText = 'ЖМИ!'; instructionText.innerText = 'БЫСТРО! Нажми пробел или кликни!'; reactionBox.classList.remove('waiting'); startTime = performance.now(); } }, delay); }
+function handleReaction() { if (testState === 'idle') startWaiting(); else if (testState === 'waiting') { if (timeoutId) clearTimeout(timeoutId); testState = 'idle'; reactionBox.classList.remove('waiting'); reactionBox.style.backgroundColor = '#ef4444'; statusText.innerText = 'ФАЛЬШСТАРТ!'; instructionText.innerText = 'Ты нажал слишком рано. Начни заново!'; results.push('false start'); saveStats(); updateDisplay(); setTimeout(() => { if (testState === 'idle') { reactionBox.style.backgroundColor = '#2563eb'; statusText.innerText = 'ГОТОВ?'; instructionText.innerText = 'Нажми пробел или кликни чтобы начать'; } }, 1000); } else if (testState === 'ready') { const reactionTime = Math.round(performance.now() - startTime); testState = 'idle'; reactionBox.classList.remove('waiting'); reactionBox.style.backgroundColor = '#22c55e'; statusText.innerText = `✅ ${reactionTime} ms`; instructionText.innerText = reactionTime <= 200 ? 'Отлично! Про-уровень!' : (reactionTime <= 300 ? 'Хорошо!' : 'Тренируйся больше!'); results.push(reactionTime); if (!bestReaction || reactionTime < bestReaction) bestReaction = reactionTime; lastTimeEl.innerText = reactionTime + ' ms'; saveStats(); updateDisplay(); attempt++; if (attempt > 3) { statusText.innerText = 'ТЕСТ ЗАВЕРШЁН!'; instructionText.innerText = `Лучшее время: ${bestReaction ? bestReaction + ' ms' : '—'}. Нажми "Сбросить" чтобы пройти заново.`; reactionBox.style.backgroundColor = '#475569'; testState = 'completed'; } else { setTimeout(() => { if (testState === 'idle') { reactionBox.style.backgroundColor = '#2563eb'; statusText.innerText = 'ГОТОВ?'; instructionText.innerText = 'Нажми пробел или кликни чтобы продолжить'; updateDisplay(); } }, 1500); } } }
+function handleClick() { if (testState === 'completed') return; handleReaction(); }
+document.addEventListener('keydown', (e) => { if (e.code === 'Space' || e.code === 'Spacebar') { e.preventDefault(); if (testState !== 'completed') handleReaction(); } });
+loadStats(); updateDisplay();
+</script>
+</body>
+</html>

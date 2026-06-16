@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS2 Pro Guide — Главная</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0f0f12; font-family: 'Inter', sans-serif; }
+    .hero-tactical {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='rgba(88,101,242,0.08)' stroke-width='1' d='M10 10h80v80H10z M20 20h60v60H20z M30 30h40v40H30z M40 40h20v20H40z'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      position: relative;
+    }
+    .hero-tactical::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(88,101,242,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .glass-card {
+      background: rgba(43, 45, 49, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--border-glow, rgba(88,101,242,0.3)), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .glass-card:hover { transform: scale(1.02); }
+    .glass-card:hover::before { background: linear-gradient(135deg, var(--hover-glow, #5865f2), rgba(88,101,242,0.5)); }
+    .hover-arrow { transition: all 0.25s ease; opacity: 0; transform: translateX(-4px); }
+    .glass-card:hover .hover-arrow { opacity: 1; transform: translateX(0); }
+    .card-maps { --border-glow: rgba(168,85,247,0.3); --hover-glow: #a855f7; --accent: #a855f7; }
+    .card-reaction { --border-glow: rgba(88,101,242,0.3); --hover-glow: #5865f2; --accent: #5865f2; }
+    .card-nades { --border-glow: rgba(249,115,22,0.3); --hover-glow: #f97316; --accent: #f97316; }
+    .card-weapons { --border-glow: rgba(251,191,36,0.3); --hover-glow: #fbbf24; --accent: #fbbf24; }
+    .card-economy { --border-glow: rgba(34,197,94,0.3); --hover-glow: #22c55e; --accent: #22c55e; }
+    .card-mechanics { --border-glow: rgba(56,189,248,0.3); --hover-glow: #38bdf8; --accent: #38bdf8; }
+    .sidebar-item-active { background: rgba(88,101,242,0.1); border-left: 3px solid #5865f2; }
+    .sidebar-item { transition: all 0.2s; }
+    .sidebar-item:hover { background: rgba(88,101,242,0.08); }
+    .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .recoil-pattern { height: 8px; background: rgba(251,191,36,0.2); border-radius: 4px; overflow: hidden; }
+    .recoil-visual { height: 100%; background: #fbbf24; border-radius: 4px; }
+    .progress-bar { height: 6px; background: rgba(34,197,94,0.2); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: #22c55e; border-radius: 3px; }
+    .sparkline { display: flex; align-items: flex-end; gap: 6px; height: 40px; margin-top: 8px; }
+    .spark-bar { width: 100%; background: #5865f2; border-radius: 2px 2px 0 0; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1e1f22; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #5865f2; border-radius: 10px; }
+    select { background: #1e1f22; border: 1px solid #2b2d31; border-radius: 8px; padding: 6px 10px; color: white; font-size: 0.8rem; outline: none; cursor: pointer; }
+    select:hover { border-color: #22c55e; }
+  </style>
+</head>
+<body class="text-gray-200">
+
+<div class="flex min-h-screen">
+  
+  <!-- САЙДБАР (единое меню для всех страниц) -->
+  <aside class="w-72 bg-[#1e1f22] border-r border-[#2b2d31] p-4 sticky top-0 h-screen overflow-y-auto hidden md:block">
+    <div class="flex items-center gap-2 mb-8 px-2">
+      <div class="w-8 h-8 bg-[#a855f7] rounded-md flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 4h16v16H4z M4 12h16 M12 4v16"/></svg>
+      </div>
+      <span class="text-white font-semibold text-lg">CS2 PRO GUIDE</span>
+    </div>
+    <div class="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">РАЗДЕЛЫ</div>
+    <div class="space-y-1">
+      <a href="/" class="sidebar-item-active sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg>
+        <span class="text-white text-sm">Главная</span>
+      </a>
+      <a href="/tips.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="text-gray-400 text-sm">Советы</span>
+      </a>
+      <a href="/maps.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg>
+        <span class="text-gray-400 text-sm">Карты</span>
+      </a>
+      <a href="/grenades.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10M12 2v10l5 5"/></svg>
+        <span class="text-gray-400 text-sm">Гранаты</span>
+      </a>
+      <a href="/mechanics.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="text-gray-400 text-sm">Механика</span>
+      </a>
+      <a href="/training.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 2 12 12 17 22 12 22 7 12 2"/><line x1="2" y1="17" x2="2" y2="12"/><line x1="22" y1="17" x2="22" y2="12"/></svg>
+        <span class="text-gray-400 text-sm">Тренировки</span>
+      </a>
+      <a href="/reaction.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="text-gray-400 text-sm">Реакция</span>
+      </a>
+      <a href="/weapons.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h10v10H7z M3 3h18v18H3z"/></svg>
+        <span class="text-gray-400 text-sm">Оружие</span>
+      </a>
+      <a href="/economy.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M6 6v12M18 6v12M4 21h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+        <span class="text-gray-400 text-sm">Экономика</span>
+      </a>
+      <a href="/contact.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <span class="text-gray-400 text-sm">Вопросы</span>
+      </a>
+    </div>
+    <div class="mt-8 pt-6 border-t border-[#2b2d31]">
+      <div class="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">СТАТИСТИКА</div>
+      <div class="px-2" id="stats-container">
+        <div class="flex justify-between text-sm"><span class="text-gray-400">Визитов</span><span class="mono text-white" id="totalVisits">0</span></div>
+        <div class="flex justify-between text-sm mt-2"><span class="text-gray-400">Серия дней</span><span class="mono text-white" id="streak">0</span></div>
+        <div class="flex justify-between text-sm mt-2"><span class="text-gray-400">Изучено</span><span class="mono text-[#a855f7]" id="learnedCount">0/24</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="flex-1">
+    <div class="hero-tactical relative pt-12 pb-16 px-8 text-center border-b border-[#2b2d31] overflow-hidden">
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <h1 class="text-6xl md:text-7xl font-bold tracking-tight mb-4 text-white">
+          CS2 <span class="text-[#a855f7]">Pro Guide</span>
+        </h1>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">Твой путь от новичка до профессионала. Тактика, механика, гранаты — всё в одном месте.</p>
+        <div class="flex gap-4 justify-center mt-8">
+          <a href="/tips.html" class="bg-[#a855f7] hover:bg-[#9333ea] px-8 py-3 rounded-md font-medium transition flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Начать обучение
+          </a>
+          <a href="/reaction.html" class="border border-[#2b2d31] hover:border-[#a855f7] px-8 py-3 rounded-md font-medium transition">Тест реакции</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-8">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">Популярные разделы</h2>
+        <div class="text-xs mono text-gray-500">активные модули</div>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Карточка 1: Карты (крупная) -->
+        <a href="/maps.html" class="glass-card card-maps rounded-2xl overflow-hidden p-6 col-span-2 min-h-[320px] cursor-pointer group block">
+          <div class="flex flex-col h-full">
+            <div class="mb-4 bg-[#1e1f22] rounded-lg p-3 w-full">
+              <svg width="100%" height="100" viewBox="0 0 300 80" fill="none" stroke="var(--accent, #a855f7)" stroke-width="1.2">
+                <rect x="10" y="10" width="45" height="30" rx="3" fill="rgba(168,85,247,0.05)"/>
+                <rect x="70" y="10" width="35" height="30" rx="3" fill="rgba(168,85,247,0.05)"/>
+                <rect x="120" y="10" width="40" height="30" rx="3" fill="rgba(168,85,247,0.05)"/>
+                <rect x="175" y="10" width="45" height="30" rx="3" fill="rgba(168,85,247,0.05)"/>
+                <rect x="235" y="10" width="30" height="30" rx="3" fill="rgba(168,85,247,0.05)"/>
+                <line x1="55" y1="25" x2="70" y2="25" stroke-dasharray="2 2"/>
+                <line x1="105" y1="25" x2="120" y2="25" stroke-dasharray="2 2"/>
+                <line x1="160" y1="25" x2="175" y2="25" stroke-dasharray="2 2"/>
+                <line x1="220" y1="25" x2="235" y2="25" stroke-dasharray="2 2"/>
+                <circle cx="250" cy="25" r="6" fill="#a855f7" stroke="none"/>
+                <circle cx="250" cy="25" r="10" stroke="#a855f7" stroke-dasharray="2 2" fill="none"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-2">Карты</h3>
+            <p class="text-gray-400 text-sm mb-4">Mirage, Inferno, Dust2, Nuke — полные гайды с гранатными линейками.</p>
+            <div class="flex gap-2 mt-auto">
+              <span class="text-xs px-2 py-1 rounded bg-[#a855f7]/10 text-[#a855f7]">4 карты</span>
+              <span class="text-xs px-2 py-1 rounded bg-[#a855f7]/10 text-[#a855f7]">Гранаты</span>
+            </div>
+            <div class="hover-arrow absolute bottom-6 right-6">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #a855f7)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Карточка 2: Тест реакции -->
+        <a href="/reaction.html" class="glass-card card-reaction rounded-2xl overflow-hidden p-5 cursor-pointer group block">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #5865f2)" stroke-width="1.5" class="mb-3"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <h3 class="text-xl font-bold text-white mb-1">Тест реакции</h3>
+          <div class="mt-2">
+            <div class="text-xs text-gray-400">Лучший результат:</div>
+            <div class="text-2xl font-bold mono" style="color: var(--accent, #5865f2)" id="reactionBest">—</div>
+          </div>
+          <div class="sparkline mt-2">
+            <div class="flex-1 flex flex-col items-center"><div class="w-full spark-bar" style="height: 24px;"></div></div>
+            <div class="flex-1 flex flex-col items-center"><div class="w-full spark-bar" style="height: 32px;"></div></div>
+            <div class="flex-1 flex flex-col items-center"><div class="w-full spark-bar" style="height: 18px;"></div></div>
+            <div class="flex-1 flex flex-col items-center"><div class="w-full spark-bar" style="height: 40px;"></div></div>
+            <div class="flex-1 flex flex-col items-center"><div class="w-full spark-bar" style="height: 28px;"></div></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">последние попытки</p>
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-[10px] text-gray-500">пройди тест</span>
+            <div class="hover-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #5865f2)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+
+                <!-- Карточка 3: Оружие (паттерны) — теперь с текстом вместо полосок -->
+        <a href="/weapons.html" class="glass-card card-weapons rounded-2xl overflow-hidden p-5 cursor-pointer group block">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #fbbf24)" stroke-width="1.5" class="mb-3"><path d="M7 7h10v10H7z M3 3h18v18H3z"/></svg>
+          <h3 class="text-xl font-bold text-white mb-1">Паттерны оружия</h3>
+          <p class="text-gray-400 text-sm mb-3">Полный справочник спрея для всех винтовок</p>
+          <div class="flex items-center gap-2 text-[#fbbf24] text-sm">
+            <span>🎯 AK-47 · M4A4 · M4A1-S · Galil · FAMAS</span>
+          </div>
+          <div class="mt-2 text-xs text-gray-500">Кликни, чтобы научиться контролировать отдачу</div>
+          <div class="flex justify-end mt-3">
+            <div class="hover-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #fbbf24)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+
+        <!-- Карточка 4: Гранаты -->
+        <a href="/grenades.html" class="glass-card card-nades rounded-2xl overflow-hidden p-5 cursor-pointer group block">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #f97316)" stroke-width="1.5" class="mb-3"><path d="M12 2a10 10 0 1 0 10 10M12 2v10l5 5"/></svg>
+          <h3 class="text-xl font-bold text-white mb-1">Гранаты</h3>
+          <p class="text-gray-400 text-xs">Линейки со скринами</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="mono text-lg" style="color: var(--accent, #f97316)">11 штук</span>
+            <div class="hover-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #f97316)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+
+        <!-- Карточка 5: Механика -->
+        <a href="/mechanics.html" class="glass-card card-mechanics rounded-2xl overflow-hidden p-5 cursor-pointer group block">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #38bdf8)" stroke-width="1.5" class="mb-3"><path d="M12 2v4M12 18v4M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg>
+          <h3 class="text-xl font-bold text-white mb-1">Механика</h3>
+          <p class="text-gray-400 text-xs">Контрстрейф, сёрф</p>
+          <div class="flex justify-between items-center mt-4">
+            <span class="mono text-lg" style="color: var(--accent, #38bdf8)">15+ статей</span>
+            <div class="hover-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #38bdf8)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+
+        <!-- Карточка 6: Экономика -->
+        <div class="glass-card card-economy rounded-2xl overflow-hidden p-5 cursor-pointer group">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #22c55e)" stroke-width="1.5" class="mb-3"><path d="M3 6h18M6 6v12M18 6v12M4 21h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+          <h3 class="text-xl font-bold text-white mb-2">Экономика</h3>
+          <div class="mt-2">
+            <label class="text-xs text-gray-400 block mb-1">Бюджет команды:</label>
+            <select id="budgetSelect" class="w-full">
+              <option value="500">менее $1000</option>
+              <option value="1500">$1000 – $2000</option>
+              <option value="2500">$2000 – $3000</option>
+              <option value="3500">$3000 – $4000</option>
+              <option value="4500" selected>$4000+</option>
+            </select>
+            <div class="flex justify-between text-xs mt-3 mb-1"><span>Уровень инвестиций</span><span id="budgetPercent">90%</span></div>
+            <div class="progress-bar"><div id="budgetFill" class="progress-fill" style="width: 90%"></div></div>
+            <div id="ecoRecommendation" class="text-sm font-medium mt-3" style="color: #22c55e;">Рекомендация: полный бай</div>
+          </div>
+          <div class="flex justify-end mt-3">
+            <div class="hover-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #22c55e)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 mt-8 text-center">
+        <div class="flex flex-wrap justify-center gap-8">
+          <div><div class="mono text-3xl font-bold text-white">50+</div><div class="text-xs text-gray-500">советов</div></div>
+          <div><div class="mono text-3xl font-bold text-white">11</div><div class="text-xs text-gray-500">гранат</div></div>
+          <div><div class="mono text-3xl font-bold text-white">4</div><div class="text-xs text-gray-500">карты</div></div>
+          <div><div class="mono text-3xl font-bold text-white">15+</div><div class="text-xs text-gray-500">механик</div></div>
+        </div>
+        <p class="text-gray-600 text-xs mt-4">CS2 PRO GUIDE — создано для улучшения игры</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // Загрузка статистики из localStorage
+  let stats = { totalVisits: 0, streak: 0, learnedItems: {} };
+  function loadStats() {
+    const saved = localStorage.getItem('cs2_stats');
+    if (saved) stats = JSON.parse(saved);
+    document.getElementById('totalVisits').innerText = stats.totalVisits || 0;
+    document.getElementById('streak').innerText = stats.streak || 0;
+    let learned = 0;
+    if (stats.learnedItems) {
+      for (let key in stats.learnedItems) if (stats.learnedItems[key]) learned++;
+    }
+    document.getElementById('learnedCount').innerText = learned + '/24';
+  }
+  loadStats();
+
+  // Загрузка лучшего времени реакции
+  function loadReactionBest() {
+    const saved = localStorage.getItem('cs2_reaction_stats');
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (data.bestReaction && data.bestReaction !== Infinity) {
+        document.getElementById('reactionBest').innerText = data.bestReaction + 'ms';
+      } else {
+        document.getElementById('reactionBest').innerText = '—';
+      }
+    }
+  }
+  loadReactionBest();
+
+  // Экономика: интерактив
+  const budgetSelect = document.getElementById('budgetSelect');
+  const budgetFill = document.getElementById('budgetFill');
+  const budgetPercent = document.getElementById('budgetPercent');
+  const ecoRecommendation = document.getElementById('ecoRecommendation');
+
+  function updateEconomy(value) {
+    let percent = (value / 5000) * 100;
+    if (percent > 100) percent = 100;
+    budgetFill.style.width = percent + '%';
+    budgetPercent.innerText = Math.round(percent) + '%';
+    let recommendation = '';
+    if (value < 1000) recommendation = 'Сейв — копи деньги';
+    else if (value < 2000) recommendation = 'Форс-бай (SMG + броня)';
+    else if (value < 3000) recommendation = 'Частичный бай (Deagle + броня)';
+    else if (value < 4000) recommendation = 'Почти полный бай';
+    else recommendation = 'Полный бай (винтовка + броня + гранаты)';
+    ecoRecommendation.innerText = recommendation;
+  }
+  budgetSelect.addEventListener('change', (e) => {
+    const val = parseInt(e.target.value, 10);
+    updateEconomy(val);
+  });
+  updateEconomy(4500);
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренировочные карты — CS2 Pro Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0f0f12; font-family: 'Inter', sans-serif; }
+    .glass-card {
+      background: rgba(43, 45, 49, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(88,101,242,0.3), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .glass-card:hover { transform: scale(1.02); }
+    .glass-card:hover::before { background: linear-gradient(135deg, #5865f2, rgba(88,101,242,0.5)); }
+    .sidebar-item-active { background: rgba(88,101,242,0.1); border-left: 3px solid #5865f2; }
+    .sidebar-item { transition: all 0.2s; }
+    .sidebar-item:hover { background: rgba(88,101,242,0.08); }
+    .card-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="text-gray-200">
+
+<div class="flex min-h-screen">
+  
+  <!-- БОКОВОЕ МЕНЮ (такое же, как везде) -->
+  <aside class="w-72 bg-[#1e1f22] border-r border-[#2b2d31] p-4 sticky top-0 h-screen overflow-y-auto hidden md:block">
+    <div class="flex items-center gap-2 mb-8 px-2">
+      <div class="w-8 h-8 bg-[#a855f7] rounded-md flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 4h16v16H4z M4 12h16 M12 4v16"/></svg>
+      </div>
+      <span class="text-white font-semibold text-lg">CS2 PRO GUIDE</span>
+    </div>
+    <div class="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">РАЗДЕЛЫ</div>
+    <div class="space-y-1">
+      <a href="/" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg>
+        <span class="text-gray-400 text-sm">Главная</span>
+      </a>
+      <a href="/tips.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="text-gray-400 text-sm">Советы</span>
+      </a>
+      <a href="/maps.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/></svg>
+        <span class="text-gray-400 text-sm">Карты</span>
+      </a>
+      <a href="/grenades.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10M12 2v10l5 5"/></svg>
+        <span class="text-gray-400 text-sm">Гранаты</span>
+      </a>
+      <a href="/mechanics.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="text-gray-400 text-sm">Механика</span>
+      </a>
+      <a href="/training.html" class="sidebar-item-active flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5"><polygon points="12 2 2 7 2 12 12 17 22 12 22 7 12 2"/><line x1="2" y1="17" x2="2" y2="12"/><line x1="22" y1="17" x2="22" y2="12"/></svg>
+        <span class="text-white text-sm">Тренировки</span>
+      </a>
+      <a href="/reaction.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="text-gray-400 text-sm">Реакция</span>
+      </a>
+      <a href="/weapons.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h10v10H7z M3 3h18v18H3z"/></svg>
+        <span class="text-gray-400 text-sm">Оружие</span>
+      </a>
+      <a href="/economy.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M6 6v12M18 6v12M4 21h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+        <span class="text-gray-400 text-sm">Экономика</span>
+      </a>
+      <a href="/contact.html" class="sidebar-item flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer block">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <span class="text-gray-400 text-sm">Вопросы</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="flex-1 p-8">
+    <h1 class="text-4xl font-bold text-white mb-2">Тренировочные карты</h1>
+    <p class="text-gray-400 mb-6">Скачай из мастерской Steam Workshop</p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Aim Botz -->
+      <div class="glass-card rounded-2xl overflow-hidden">
+        <img src="https://images.steamusercontent.com/ugc/2200631506775957080/E0956458913A0AAA76286018685331D4E7C283ED/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" 
+             alt="Aim Botz" 
+             class="card-img">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-[#5865f2]">Aim Botz</h2>
+          <p class="text-gray-400 text-sm mb-2">by Ulletical</p>
+          <p class="text-gray-300 mb-3 text-sm">Лучшая карта для разогрева и тренировки прицела. Боты бегают, прыгают, можно настроить скорость и здоровье.</p>
+          <div class="space-y-1 mb-3 text-xs text-gray-400">
+            <p>✅ Режимы: статичные, движущиеся, скоростные боты</p>
+            <p>✅ Настройка здоровья, брони, дистанции</p>
+            <p>✅ Подсчёт точности и убийств</p>
+          </div>
+          <button onclick="window.open('https://steamcommunity.com/sharedfiles/filedetails/?id=3070244462', '_blank')" class="w-full bg-[#5865f2]/20 hover:bg-[#5865f2] text-[#5865f2] hover:text-white py-2 rounded transition text-sm">📥 Открыть в Steam</button>
+        </div>
+      </div>
+
+      <!-- Recoil Master -->
+      <div class="glass-card rounded-2xl overflow-hidden">
+        <img src="https://images.steamusercontent.com/ugc/2307594539200909280/D6EC5A3E351A22474190BEF43122C069AA5BF1D0/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" 
+             alt="Recoil Master" 
+             class="card-img">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-[#5865f2]">Recoil Master</h2>
+          <p class="text-gray-400 text-sm mb-2">by Ulletical</p>
+          <p class="text-gray-300 mb-3 text-sm">Тренировка паттернов стрельбы. Визуальная подсказка спрея для любого оружия.</p>
+          <div class="space-y-1 mb-3 text-xs text-gray-400">
+            <p>✅ Все виды оружия (AK, M4, AWP, Deagle)</p>
+            <p>✅ Визуальная линия паттерна</p>
+            <p>✅ Режим "ghost crosshair" для отслеживания</p>
+          </div>
+          <button onclick="window.open('https://steamcommunity.com/sharedfiles/filedetails/?id=3100869952', '_blank')" class="w-full bg-[#5865f2]/20 hover:bg-[#5865f2] text-[#5865f2] hover:text-white py-2 rounded transition text-sm">📥 Открыть в Steam</button>
+        </div>
+      </div>
+
+      <!-- Yprac -->
+      <div class="glass-card rounded-2xl overflow-hidden">
+        <img src="https://images.steamusercontent.com/ugc/11640952776897966666/56925546ADE4CCA5F56F024450C0004458448C4A/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" 
+             alt="Yprac" 
+             class="card-img">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-[#5865f2]">Yprac</h2>
+          <p class="text-gray-400 text-sm mb-2">by Yesber</p>
+          <p class="text-gray-300 mb-3 text-sm">Гайды по гранатам, преайм позициям и линейкам на всех картах.</p>
+          <div class="space-y-1 mb-3 text-xs text-gray-400">
+            <p>✅ 100+ гранатных линеек с демонстрацией</p>
+            <p>✅ Режим тренировки преайма</p>
+            <p>✅ Позиции ботов</p>
+          </div>
+          <button onclick="window.open('https://steamcommunity.com/sharedfiles/filedetails/?id=3070715607', '_blank')" class="w-full bg-[#5865f2]/20 hover:bg-[#5865f2] text-[#5865f2] hover:text-white py-2 rounded transition text-sm">📥 Открыть в Steam</button>
+        </div>
+      </div>
+
+      <!-- Refrag.gg -->
+      <div class="glass-card rounded-2xl overflow-hidden">
+        <img src="https://images.steamusercontent.com/ugc/13305079561530727945/01E36A85E3737361BF0AA32EE21C5E5B22DE966A/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" 
+             alt="Refrag.gg" 
+             class="card-img">
+        <div class="p-5">
+          <h2 class="text-2xl font-bold text-[#5865f2]">Refrag.gg</h2>
+          <p class="text-gray-400 text-sm mb-2">by Refrag</p>
+          <p class="text-gray-300 mb-3 text-sm">Реакция, трекинг, фликчи, преайм — всё в одном месте.</p>
+          <div class="space-y-1 mb-3 text-xs text-gray-400">
+            <p>✅ Режим "тренировка реакции"</p>
+            <p>✅ Трекинг движущихся целей</p>
+            <p>✅ Флики и снайперская практика</p>
+          </div>
+          <button onclick="window.open('https://steamcommunity.com/sharedfiles/filedetails/?id=3416003536', '_blank')" class="w-full bg-[#5865f2]/20 hover:bg-[#5865f2] text-[#5865f2] hover:text-white py-2 rounded transition text-sm">📥 Открыть в Steam</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="glass-card rounded-2xl p-5 mt-6 text-center">
+      <p class="text-sm text-gray-400">💡 <strong class="text-[#5865f2]">Как установить карту?</strong> Нажми «Открыть в Steam» → на странице карты нажми <strong class="text-white">«Подписаться»</strong> → запусти CS2 → выбери <strong class="text-white">Играть → Workshop Maps</strong>.</p>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>
