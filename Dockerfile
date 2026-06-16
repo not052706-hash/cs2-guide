@@ -2,11 +2,17 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY backend/package*.json ./backend/
-RUN cd backend && npm install
+# Копируем package.json и package-lock.json (если есть)
+COPY backend/package*.json /app/backend/
 
-COPY . .
+# Устанавливаем зависимости
+RUN cd /app/backend && npm install
 
+# Копируем ВСЕ файлы проекта
+COPY . /app/
+
+# Открываем порт
 EXPOSE 3000
 
-CMD ["node", "backend/server.js"]
+# Запускаем сервер
+CMD ["node", "/app/backend/server.js"]
